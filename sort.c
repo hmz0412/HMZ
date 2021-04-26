@@ -60,7 +60,7 @@ int main(){
     fclose(fp1);
     fclose(fp2);
     fp3=fopen("data1.txt","r");
-    fp4=fopen("data2.txt","r");//rewind?
+    fp4=fopen("data2.txt","r");//rewind??髡
     for(i=0;i<size;i++){
 	    fscanf(fp3,"%d",&Qnum[i]);
         fscanf(fp4,"%s",Qstr[i]);
@@ -72,10 +72,14 @@ int main(){
     unsigned long diff;
     gettimeofday(&start, NULL);
     quicksort_num(Qnum,0,size-1);
+    gettimeofday(&end,NULL);
+    diff = 1000000*(end.tv_sec-start.tv_sec)+ end.tv_usec - start.tv_usec;
+    printf("quick Sort performance for num %ld us (equal %f sec)\n", diff, diff / 1000000.0);
+    gettimeofday(&start, NULL);
     quicksort_str(Qstr,0,size-1);
     gettimeofday(&end,NULL);
     diff = 1000000*(end.tv_sec-start.tv_sec)+ end.tv_usec - start.tv_usec;
-    printf("Sorting performance %ld us (equal %f sec)\n", diff, diff / 1000000.0);
+    printf("quick Sort performance for str %ld us (equal %f sec)\n", diff, diff / 1000000.0);
     for(i=0;i<size;i++){
 	fscanf(fp3,"%d",&Mnum[i]);
 	fscanf(fp4,"%s",Mstr[i]);
@@ -84,19 +88,28 @@ int main(){
     rewind(fp4);
    gettimeofday(&start, NULL);
    Mergesort_num(Mnum,0,size-1);
+   gettimeofday(&end,NULL);
+   diff = 1000000*(end.tv_sec-start.tv_sec)+ end.tv_usec - start.tv_usec;
+   printf("merge Sort performance for num %ld us (equal %f sec)\n", diff, diff / 1000000.0);
+   gettimeofday(&start, NULL);
    Mergesort_str(Mstr,0,size-1);
    gettimeofday(&end,NULL);
    diff = 1000000*(end.tv_sec-start.tv_sec)+ end.tv_usec - start.tv_usec;
-   printf("Sorting performance %ld us (equal %f sec)\n", diff, diff / 1000000.0);
+   printf("merge Sort performance for str %ld us (equal %f sec)\n", diff, diff / 1000000.0);
     for(i=0;i<size;i++){
 	fscanf(fp3,"%d",&Hnum[i]);
 	fscanf(fp4,"%s",Hstr[i]);
     }
     gettimeofday(&start, NULL);
     heapsort_num(Hnum,size);
+    gettimeofday(&end,NULL);
+    diff = 1000000*(end.tv_sec-start.tv_sec)+ end.tv_usec - start.tv_usec;
+    printf("heap Sort performance for num %ld us (equal %f sec)\n", diff, diff / 1000000.0);
+    gettimeofday(&start, NULL);
     heapsort_str(Hstr,size);
     gettimeofday(&end,NULL);
     diff = 1000000*(end.tv_sec-start.tv_sec)+ end.tv_usec - start.tv_usec;
-    printf("Sorting performance %ld us (equal %f sec)\n", diff, diff / 1000000.0);
+    printf("heap Sort performance for str %ld us (equal %f sec)\n", diff, diff / 1000000.0);
  }
+
 
